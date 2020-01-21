@@ -1,0 +1,67 @@
+version: "3"
+services:
+  mysql:
+    image: mysql
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: keystone
+      MYSQL_USER: keystone
+      MYSQL_PASSWORD: keystone
+    volumes:
+    - ./data/mysql_data:/var/lib/mysql
+    networks:
+      idp:
+        ipv4_address: 172.100.0.10
+  rabbitmq:
+    image: rabbitmq
+    ports:
+    - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: keystone
+      RABBITMQ_DEFAULT_PASS: keystone
+      RABBITMQ_DEFAULT_VHOST: openstack
+    volumes:
+    - ./data/rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      idp:
+        ipv4_address: 172.100.0.11
+  keystone:
+    build:
+      context: ./keystone
+    image: keystone
+    ports:
+    - "5001:5001"
+    environment:
+      TRANSPORT_URL: "rabbit://keystone:keystone@rabbitmq:5672/openstack/"
+      CONNECTION: "mysql+pymysql://keystone:keystone@mysql:3306/keystone"
+      ENTRYPOINT_HOST: 172.100.0.100
+    depends_on:
+      - mysql
+      - rabbitmq
+    networks:
+      idp:
+        ipv4_address: 172.100.0.12
+  keystone-proxy:
+    build:
+      context: ./keystone-proxy
+    image: keystone-proxy
+    ports:
+    - "5000:5000"
+    - "8000:80"
+    environment:
+      KEYSTONE_UWSGI_HOST: keystone
+      SERVER_NAME: keystone-proxy
+    depends_on:
+      - keystone
+    networks:
+      idp:
+        ipv4_address: 172.100.0.100
+
+networks:
+  idp:
+    ipam:
+      driver: default
+      config:
+      - subnet: "172.100.0.0/24"
