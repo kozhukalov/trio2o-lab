@@ -49,10 +49,10 @@ services:
     image: keystone-proxy
     ports:
     - "5000:5000"
-    - "8000:80"
+    - "80:80"
     environment:
       KEYSTONE_UWSGI_HOST: keystone
-      SERVER_NAME: keystone-proxy
+      SERVER_NAME: trio2o-lab-03
     depends_on:
       - keystone
     networks:
