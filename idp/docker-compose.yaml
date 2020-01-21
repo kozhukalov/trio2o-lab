@@ -36,7 +36,7 @@ services:
     environment:
       TRANSPORT_URL: "rabbit://keystone:keystone@rabbitmq:5672/openstack/"
       CONNECTION: "mysql+pymysql://keystone:keystone@mysql:3306/keystone"
-      ENTRYPOINT_HOST: trio2o-lab-03
+      ENDPOINT_HOST: trio2o-lab-03
     depends_on:
       - mysql
       - rabbitmq
