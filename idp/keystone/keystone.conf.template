@@ -2263,47 +2263,47 @@ connection = ${CONNECTION}
 # identity provider metadata and must be a URI (a URL is recommended). For
 # example: `https://keystone.example.com/v3/OS-FEDERATION/saml2/idp`. (uri
 # value)
-#idp_entity_id = <None>
+idp_entity_id = ${IDP_ENTITY_ID}
 
 # This is the single sign-on (SSO) service location of the identity provider
 # which accepts HTTP POST requests. A value is required to generate identity
 # provider metadata. For example: `https://keystone.example.com/v3/OS-
 # FEDERATION/saml2/sso`. (uri value)
-#idp_sso_endpoint = <None>
+idp_sso_endpoint = ${IDP_SSO_ENDPOINT}
 
 # This is the language used by the identity provider's organization. (string
 # value)
 #idp_lang = en
 
 # This is the name of the identity provider's organization. (string value)
-#idp_organization_name = SAML Identity Provider
+idp_organization_name = SAML Identity Provider
 
 # This is the name of the identity provider's organization to be displayed.
 # (string value)
-#idp_organization_display_name = OpenStack SAML Identity Provider
+idp_organization_display_name = OpenStack SAML Identity Provider
 
 # This is the URL of the identity provider's organization. The URL referenced
 # here should be useful to humans. (uri value)
-#idp_organization_url = https://example.com/
+idp_organization_url = https://example.com/
 
 # This is the company name of the identity provider's contact person. (string
 # value)
-#idp_contact_company = Example, Inc.
+idp_contact_company = Example, Inc.
 
 # This is the given name of the identity provider's contact person. (string
 # value)
-#idp_contact_name = SAML Identity Provider Support
+idp_contact_name = SAML Identity Provider Support
 
 # This is the surname of the identity provider's contact person. (string value)
-#idp_contact_surname = Support
+idp_contact_surname = Support
 
 # This is the email address of the identity provider's contact person. (string
 # value)
-#idp_contact_email = support@example.com
+idp_contact_email = support@example.com
 
 # This is the telephone number of the identity provider's contact person.
 # (string value)
-#idp_contact_telephone = +1 800 555 0100
+idp_contact_telephone = +1 800 555 0100
 
 # This is the type of contact that best describes the identity provider's
 # contact person. (string value)
@@ -2313,7 +2313,7 @@ connection = ${CONNECTION}
 # administrative - <No description provided>
 # billing - <No description provided>
 # other - <No description provided>
-#idp_contact_type = other
+idp_contact_type = other
 
 # Absolute path to the identity provider metadata file. This file should be
 # generated with the `keystone-manage saml_idp_metadata` command. There is
@@ -2443,7 +2443,7 @@ connection = ${CONNECTION}
 # Its value may be silently ignored in the future.
 # Reason: `keystone-manage pki_setup` was deprecated in Mitaka and removed in
 # Pike. These options remain for backwards compatibility.
-#certfile = /etc/keystone/ssl/certs/signing_cert.pem
+certfile = /etc/keystone/ssl/certs/signing_cert.pem
 
 # DEPRECATED: Absolute path to the private key file to use for signing
 # responses to revocation lists requests. Set this together with `[signing]
@@ -2452,7 +2452,7 @@ connection = ${CONNECTION}
 # Its value may be silently ignored in the future.
 # Reason: `keystone-manage pki_setup` was deprecated in Mitaka and removed in
 # Pike. These options remain for backwards compatibility.
-#keyfile = /etc/keystone/ssl/private/signing_key.pem
+keyfile = /etc/keystone/ssl/private/signing_key.pem
 
 # DEPRECATED: Absolute path to the public certificate authority (CA) file to
 # use when creating self-signed certificates with `keystone-manage pki_setup`.
