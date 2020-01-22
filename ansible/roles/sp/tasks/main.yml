@@ -1,0 +1,111 @@
+# This playbook is supposed to be run against a host where devstack successed to deploy Openstack
+# This is to reconfigure keystone to use federation IDP
+
+- name: Shibboleth yum repo
+  yum_repository:
+    name: shibboleth
+    description: "Shibboleth (CentOS_7)"
+    mirrorlist: https://shibboleth.net/cgi-bin/mirrorlist.cgi/CentOS_7
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://download.opensuse.org/repositories/security:/shibboleth/CentOS_7/repodata/repomd.xml.key
+
+- name: Install shibboleth package
+  yum:
+    name: shibboleth.x86_64
+    state: present
+
+- name: Configure shibd shibboleth2.xml
+  template:
+    src: shibboleth2.xml
+    dest: /etc/shibboleth/shibboleth2.xml
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Systemd reload
+    - Restart shibd
+
+- name: Configure shibd attribute-map.xml
+  template:
+    src: attribute-map.xml
+    dest: /etc/shibboleth/attribute-map.xml
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - Systemd reload
+  - Restart shibd
+
+- name: Configure httpd
+  template:
+    src: keystone-wsgi-public.conf
+    dest: /etc/httpd/conf.d/keystone-wsgi-public.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - Systemd reload
+  - Restart httpd
+
+- name: Load mod_shib
+  template:
+    src: 11-shib.conf
+    dest: /etc/httpd/conf.modules.d/11-shib.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - Systemd reload
+  - Restart httpd
+
+- name: Generate shibboleth key
+  command: /etc/shibboleth/keygen.sh -y 3
+  args:
+    chdir: /etc/shibboleth
+    creates: /etc/shibboleth/sp-cert.pem
+  notify:
+    - Systemd reload
+    - Restart shibd
+
+- name: Change shibboleth key permissions
+  file:
+    path: /etc/shibboleth/sp-key.pem
+    owner: shibd
+    group: shibd
+    mode: 0600
+  notify:
+    - Systemd reload
+    - Restart shibd
+
+- name: Change shibboleth cert permissions
+  file:
+    path: /etc/shibboleth/sp-cert.pem
+    owner: shibd
+    group: shibd
+    mode: 0644
+  notify:
+    - Systemd reload
+    - Restart shibd
+
+- name: Samltest IDP metadata
+  copy:
+    src: samltest_metadata_idp.xml
+    dest: /etc/shibboleth/samltest_metadata_idp.xml
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Systemd reload
+    - Restart shibd
+
+- name: Configure keystone
+  template:
+    src: keystone.conf
+    dest: /etc/keystone/keystone.conf
+    owner: stack
+    group: stack
+    mode: 0666
+  notify:
+  - Systemd reload
+  - Restart keystone

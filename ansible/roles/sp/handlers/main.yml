@@ -1,0 +1,17 @@
+- name: Systemd reload
+  shell: systemctl daemon-reload
+
+- name: Restart shibd
+  service:
+    name: shibd
+    state: restarted
+
+- name: Restart httpd
+  service:
+    name: httpd
+    state: restarted
+
+- name: Restart keystone
+  service:
+    name: devstack@keystone
+    state: restarted

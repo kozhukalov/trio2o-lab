@@ -1,0 +1,10 @@
+---
+- name: Keystone service provider
+  hosts: sp
+  user: centos
+  become: true
+  become_method: sudo
+  gather_facts: true
+
+  roles:
+  - sp
