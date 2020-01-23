@@ -37,8 +37,8 @@ services:
       TRANSPORT_URL: "rabbit://keystone:keystone@rabbitmq:5672/openstack/"
       CONNECTION: "mysql+pymysql://keystone:keystone@mysql:3306/keystone"
       ENDPOINT_HOST: trio2o-lab-03
-      IDP_ENTITY_ID: https://trio2o-lab-03/identity/OS-FEDERATION/saml2/idp
-      IDP_SSO_ENDPOINT: https://trio2o-lab-03/identity/OS-FEDERATION/saml2/sso
+      IDP_ENTITY_ID: http://trio2o-lab-03/identity/OS-FEDERATION/saml2/idp
+      IDP_SSO_ENDPOINT: http://trio2o-lab-03/identity/OS-FEDERATION/saml2/sso
     depends_on:
       - mysql
       - rabbitmq
