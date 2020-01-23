@@ -2318,7 +2318,7 @@ idp_contact_type = other
 # Absolute path to the identity provider metadata file. This file should be
 # generated with the `keystone-manage saml_idp_metadata` command. There is
 # typically no reason to change this value. (string value)
-#idp_metadata_path = /etc/keystone/saml2_idp_metadata.xml
+idp_metadata_path = /etc/keystone/saml2_idp_metadata.xml
 
 # The prefix of the RelayState SAML attribute to use when generating enhanced
 # client and proxy (ECP) assertions. In a typical deployment, there is no

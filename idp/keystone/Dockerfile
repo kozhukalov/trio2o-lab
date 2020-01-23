@@ -18,7 +18,7 @@ EXPOSE 5001
 
 COPY keystone.conf.template /etc/keystone/keystone.conf.template
 COPY signing_key.pem /etc/keystone/ssl/private/signing_key.pem
-COPY signing_cert.pem /etc/keystone/ssl/private/signing_cert.pem
+COPY signing_cert.pem /etc/keystone/ssl/certs/signing_cert.pem
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
