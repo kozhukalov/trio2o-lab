@@ -1,7 +1,7 @@
 FROM python:3.6
 
 RUN apt-get update && \
-    apt-get install -y python-dev openssl gnutls-bin libssl-dev git gettext-base less
+    apt-get install -y python-dev openssl gnutls-bin libssl-dev git gettext-base less xmlsec1
 
 WORKDIR /
 
