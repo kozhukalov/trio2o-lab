@@ -1,7 +1,7 @@
 FROM nginx
 
 RUN apt-get update \
-    && apt-get install -y nginx-extras procps wget ca-certificates \
+    && apt-get install -y nginx-extras procps wget ca-certificates less \
     && sed 's%user www-data%user root%' -i /etc/nginx/nginx.conf \
     && rm /etc/nginx/conf.d/*
 
