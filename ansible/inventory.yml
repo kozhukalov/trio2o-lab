@@ -3,3 +3,6 @@ all:
     sp:
       hosts:
         trio2o-lab-01:
+    idp:
+      hosts:
+        trio2o-lab-03:

@@ -1,9 +1,10 @@
 ---
-- hosts: all
+- name: Keystone identity provider
+  hosts: idp
   user: centos
   become: true
   become_method: sudo
   gather_facts: true
 
   roles:
-    - fake
+  - hosts

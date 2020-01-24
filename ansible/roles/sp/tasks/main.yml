@@ -65,8 +65,8 @@
     chdir: /etc/shibboleth
     creates: /etc/shibboleth/sp-cert.pem
   notify:
-    - Systemd reload
-    - Restart shibd
+  - Systemd reload
+  - Restart shibd
 
 - name: Change shibboleth key permissions
   file:
@@ -75,8 +75,8 @@
     group: shibd
     mode: 0600
   notify:
-    - Systemd reload
-    - Restart shibd
+  - Systemd reload
+  - Restart shibd
 
 - name: Change shibboleth cert permissions
   file:
@@ -85,19 +85,8 @@
     group: shibd
     mode: 0644
   notify:
-    - Systemd reload
-    - Restart shibd
-
-- name: Samltest IDP metadata
-  copy:
-    src: samltest_metadata_idp.xml
-    dest: /etc/shibboleth/samltest_metadata_idp.xml
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - Systemd reload
-    - Restart shibd
+  - Systemd reload
+  - Restart shibd
 
 - name: Configure keystone
   template:
