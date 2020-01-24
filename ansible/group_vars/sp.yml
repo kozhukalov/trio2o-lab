@@ -1,2 +1,2 @@
-idp_entity_id: http://trio2o-lab-03/identity/OS-FEDERATION/saml2/idp
-idp_metadata_url: http://trio2o-lab-03/identity/OS-FEDERATION/saml2/metadata
+idp_entity_id: http://trio2o-lab-03/identity/v3/OS-FEDERATION/saml2/idp
+idp_metadata_url: http://trio2o-lab-03/identity/v3/OS-FEDERATION/saml2/metadata
