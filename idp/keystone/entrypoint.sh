@@ -18,9 +18,8 @@ keystone-manage saml_idp_metadata > /etc/keystone/saml2_idp_metadata.xml
 
 keystone-manage bootstrap \
   --bootstrap-password secret \
-  --bootstrap-admin-url http://${ENDPOINT_HOST}:5000/v3/ \
-  --bootstrap-internal-url http://${ENDPOINT_HOST}:5000/v3/ \
-  --bootstrap-public-url http://${ENDPOINT_HOST}:5000/v3/ \
+  --bootstrap-admin-url http://${ENDPOINT_HOST}/identity \
+  --bootstrap-public-url http://${ENDPOINT_HOST}/identity \
   --bootstrap-region-id RegionOne
 
 uwsgi /keystone/httpd/keystone-uwsgi-public.ini
