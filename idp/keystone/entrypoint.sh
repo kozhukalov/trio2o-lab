@@ -7,8 +7,8 @@ fi
 export TRANSPORT_URL=${TRANSPORT_URL:-rabbit://keystone:keystone@rabbitmq:5672/openstack/}
 export CONNECTION=${CONNECTION:-mysql+pymysql://keystone:keystone@mysql:3306/keystone}
 export ENDPOINT_HOST=${ENDPOINT_HOST:-keystone}
-export IDP_ENTITY_ID=${IDP_ENTITY_ID:-http://${ENDPOINT_HOST}/identity/OS-FEDERATION/saml2/idp}
-export IDP_SSO_ENDPOINT=${IDP_SSO_ENDPOINT:-http://${ENDPOINT_HOST}/identity/OS-FEDERATION/saml2/sso}
+export IDP_ENTITY_ID=${IDP_ENTITY_ID:-http://${ENDPOINT_HOST}/identity/v3/OS-FEDERATION/saml2/idp}
+export IDP_SSO_ENDPOINT=${IDP_SSO_ENDPOINT:-http://${ENDPOINT_HOST}/identity/v3/OS-FEDERATION/saml2/sso}
 
 envsubst '$TRANSPORT_URL $CONNECTION $IDP_ENTITY_ID $IDP_SSO_ENDPOINT' < /etc/keystone/keystone.conf.template > /etc/keystone/keystone.conf
 
