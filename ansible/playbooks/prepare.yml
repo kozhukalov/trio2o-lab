@@ -1,10 +1,10 @@
 ---
-- name: Keystone identity provider
-  hosts: idp
+- name: Prepare
+  hosts: all
   user: centos
   become: true
   become_method: sudo
   gather_facts: true
 
   roles:
-  - hosts
+  - prepare

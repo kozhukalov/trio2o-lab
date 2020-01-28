@@ -1,0 +1,31 @@
+- name: Configure /etc/hosts
+  template:
+    src: hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: prepare.sh
+  template:
+    src: prepare.sh
+    dest: /home/centos/prepare.sh
+    owner: centos
+    group: centos
+    mode: 0755
+
+- name: devstack_other.sh
+  template:
+    src: devstack_other.sh
+    dest: /home/centos/devstack_other.sh
+    owner: centos
+    group: centos
+    mode: 0755
+
+- name: devstack_top.sh
+  template:
+    src: devstack_top.sh
+    dest: /home/centos/devstack_top.sh
+    owner: centos
+    group: centos
+    mode: 0755
