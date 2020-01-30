@@ -1,13 +1,8 @@
-floating_etc_hosts:
+etc_hosts:
   trio2o-lab-01: 172.16.242.240
   trio2o-lab-02: 172.16.246.111
   trio2o-lab-03: 172.16.242.162
   trio2o-lab-04: 172.16.244.77
-etc_hosts:
-  trio2o-lab-01: 10.10.10.7
-  trio2o-lab-02: 10.10.10.9
-  trio2o-lab-03: 10.10.10.19
-  trio2o-lab-04: 10.10.10.12
-top_host: trio2o-lab-01
+top_host: trio2o-lab-03
 top_region_name: RegionOne
 admin_password: secret

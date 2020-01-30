@@ -1,0 +1,47 @@
+- name: Configure /etc/hosts
+  template:
+    src: hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: prepare.sh
+  template:
+    src: prepare.sh
+    dest: /home/ubuntu/prepare.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+
+- name: devstack_other.sh
+  template:
+    src: devstack_other.sh
+    dest: /home/ubuntu/devstack_other.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+
+- name: devstack_top.sh
+  template:
+    src: devstack_top.sh
+    dest: /home/ubuntu/devstack_top.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+
+- name: devstack_other_ovn.sh
+  template:
+    src: devstack_other_ovn.sh
+    dest: /home/ubuntu/devstack_other_ovn.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+
+- name: devstack_top_ovn.sh
+  template:
+    src: devstack_top_ovn.sh
+    dest: /home/ubuntu/devstack_top_ovn.sh
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755

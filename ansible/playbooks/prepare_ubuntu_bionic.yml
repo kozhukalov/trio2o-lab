@@ -1,0 +1,10 @@
+---
+- name: Prepare
+  hosts: all
+  user: ubuntu
+  become: true
+  become_method: sudo
+  gather_facts: true
+
+  roles:
+  - prepare_ubuntu_bionic

@@ -2,8 +2,6 @@ version: "3"
 services:
   mysql:
     image: mysql
-    # ports:
-    # - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: keystone
@@ -13,11 +11,9 @@ services:
     - ./data/mysql_data:/var/lib/mysql
     networks:
       idp:
-        ipv4_address: 172.100.0.10
+        ipv4_address: 172.100.100.10
   rabbitmq:
     image: rabbitmq
-    # ports:
-    # - "5672:5672"
     environment:
       RABBITMQ_DEFAULT_USER: keystone
       RABBITMQ_DEFAULT_PASS: keystone
@@ -26,52 +22,38 @@ services:
     - ./data/rabbitmq_data:/var/lib/rabbitmq
     networks:
       idp:
-        ipv4_address: 172.100.0.11
-  keystone:
+        ipv4_address: 172.100.100.11
+  keystone-uwsgi:
     build:
       context: ./keystone
     image: keystone
-    ports:
-    - "5001:5001"
     environment:
       TRANSPORT_URL: "rabbit://keystone:keystone@rabbitmq:5672/openstack/"
       CONNECTION: "mysql+pymysql://keystone:keystone@mysql:3306/keystone"
-      # ENDPOINT_HOST: trio2o-lab-03
-      # IDP_ENTITY_ID: http://trio2o-lab-03/identity/v3/OS-FEDERATION/saml2/idp
-      # IDP_SSO_ENDPOINT: http://trio2o-lab-03/identity/v3/OS-FEDERATION/saml2/sso
     depends_on:
       - mysql
       - rabbitmq
     networks:
       idp:
-        ipv4_address: 172.100.0.12
-    # extra_hosts:
-    # - "trio2o-lab-01:10.10.10.5"
-    # - "trio2o-lab-02:10.10.10.10"
-    # - "trio2o-lab-03:10.10.10.14"
-  keystone-proxy:
+        ipv4_address: 172.100.100.12
+  keystone:
     build:
       context: ./keystone-proxy
     image: keystone-proxy
     ports:
-    - "5000:5000"
     - "80:80"
     environment:
-      KEYSTONE_UWSGI_HOST: keystone
-      # SERVER_NAME: trio2o-lab-03
+      KEYSTONE_UWSGI_HOST: keystone-uwsgi
+      SERVER_NAME: keystone
     depends_on:
-      - keystone
+      - keystone-uwsgi
     networks:
       idp:
-        ipv4_address: 172.100.0.100
-    # extra_hosts:
-    # - "trio2o-lab-01:10.10.10.5"
-    # - "trio2o-lab-02:10.10.10.10"
-    # - "trio2o-lab-03:10.10.10.14"
+        ipv4_address: 172.100.100.100
 
 networks:
   idp:
     ipam:
       driver: default
       config:
-      - subnet: "172.100.0.0/24"
+      - subnet: "172.100.100.0/24"
